@@ -33,9 +33,14 @@ ThreadInstanceAllocator::ThreadInstanceAllocator(const uint64_t problemSize, con
     m_problemSizeOffsets.back() = problemSize;
 }
 
-const uint64_t ThreadInstanceAllocator::getNextOffset()
+uint64_t ThreadInstanceAllocator::getNextOffset()
 {
     uint32_t nextOffset = m_problemSizeOffsets[m_currentOffsetsIndex];
     m_currentOffsetsIndex = (m_currentOffsetsIndex + 1) % m_problemSizeOffsets.size();
     return nextOffset;
+}
+
+void ThreadInstanceAllocator::reset()
+{
+    m_currentOffsetsIndex = 0;
 }
